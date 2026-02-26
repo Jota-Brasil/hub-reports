@@ -2,92 +2,89 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard Executivo — Jota Dental Jan/Fev 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CEO Dashboard — Jota Dental Jan/Fev 2026</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
-:root{
-  --bg:#0d0f1a;--card:#141728;--card2:#1a1d2e;
-  --border:#252840;--text:#e2e8f0;--muted:#64748b;
-  --primary:#6366f1;--accent:#a78bfa;--green:#10b981;
-  --yellow:#f59e0b;--red:#ef4444;
-}
+:root{--bg:#0d0f1a;--card:#141728;--card2:#1a1d2e;--border:#252840;--text:#e2e8f0;--muted:#64748b;--primary:#6366f1;--accent:#a78bfa;--green:#10b981;--yellow:#f59e0b;--red:#ef4444}
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;min-height:100vh;padding:24px 16px}
-.wrap{max-width:1100px;margin:0 auto}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,sans-serif;padding:20px 16px}
+.wrap{max-width:1140px;margin:0 auto}
 
-/* HEADER */
-.hdr{background:linear-gradient(135deg,#1a1d3a 0%,#0d1547 50%,#1a0a3a 100%);border-radius:16px;padding:28px 32px;margin-bottom:28px;display:flex;align-items:center;gap:20px;border:1px solid var(--border)}
-.hdr-logo{height:52px;object-fit:contain}
-.hdr-sep{width:1px;height:52px;background:rgba(255,255,255,0.15)}
-.hdr-text h1{font-size:22px;font-weight:700;color:#fff;letter-spacing:-0.3px}
-.hdr-text p{font-size:13px;color:#a0aec0;margin-top:4px}
+.hdr{background:linear-gradient(135deg,#1a1d3a 0%,#0d1547 50%,#1a0a3a 100%);border-radius:16px;padding:26px 30px;margin-bottom:24px;display:flex;align-items:center;gap:20px;border:1px solid var(--border);flex-wrap:wrap}
+.hdr-logo{height:48px;object-fit:contain}
+.hdr-sep{width:1px;height:48px;background:rgba(255,255,255,0.15)}
+.hdr-text h1{font-size:21px;font-weight:700;color:#fff}
+.hdr-text p{font-size:12px;color:#a0aec0;margin-top:3px}
 .hdr-badge{margin-left:auto;text-align:right}
-.hdr-badge .tag{display:inline-block;background:rgba(99,102,241,0.2);border:1px solid var(--primary);color:var(--accent);font-size:11px;padding:4px 10px;border-radius:20px;margin-bottom:4px}
-.hdr-badge p{font-size:11px;color:var(--muted)}
+.hdr-badge .tag{display:inline-block;background:rgba(99,102,241,0.2);border:1px solid var(--primary);color:var(--accent);font-size:11px;padding:3px 10px;border-radius:20px}
+.hdr-badge p{font-size:10px;color:var(--muted);margin-top:3px}
 
 /* KPIs */
-.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:28px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px}
-.kpi-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
-.kpi-val{font-size:26px;font-weight:700;letter-spacing:-1px;line-height:1}
-.kpi-sub{font-size:12px;color:var(--muted);margin-top:6px}
-.kpi-delta{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:6px}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;position:relative;overflow:hidden}
+.kpi::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary);border-radius:3px 0 0 3px}
+.kpi.green::before{background:var(--green)}
+.kpi.yellow::before{background:var(--yellow)}
+.kpi.red::before{background:var(--red)}
+.kpi-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;margin-bottom:7px}
+.kpi-val{font-size:24px;font-weight:700;letter-spacing:-1px;line-height:1}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:5px}
+.chip{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;margin-top:5px}
 .up{background:#10b98120;color:#10b981}
 .dn{background:#ef444420;color:#ef4444}
 .flat{background:#f59e0b20;color:#f59e0b}
 
-/* SECTIONS */
-.section{margin-bottom:28px}
-.section-title{font-size:14px;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.section-title::before{content:'';width:3px;height:16px;background:var(--primary);border-radius:2px}
+/* SECTION */
+.sec-title{font-size:12px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;display:flex;align-items:center;gap:7px}
+.sec-title::before{content:'';width:3px;height:14px;background:var(--primary);border-radius:2px}
 
-/* CARDS 2-col */
-.two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
-@media(max-width:700px){.two-col{grid-template-columns:1fr}}
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:20px}
+.two-col{display:grid;grid-template-columns:1.4fr 1fr;gap:18px;margin-bottom:20px}
+@media(max-width:760px){.two-col{grid-template-columns:1fr}}
+.chart-h{position:relative;height:200px}
+.chart-h-lg{position:relative;height:230px}
 
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
-.card-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:16px}
-
-/* CHART */
-.chart-wrap{position:relative;height:220px}
+/* META PROGRESS BARS */
+.meta-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.meta-bar-row:last-child{margin-bottom:0}
+.meta-bar-name{font-size:12px;width:90px;flex-shrink:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta-bar-wrap{flex:1;height:8px;background:#1e2235;border-radius:4px;overflow:hidden}
+.meta-bar-fill{height:100%;border-radius:4px;transition:width .6s ease}
+.meta-bar-pct{font-size:11px;font-weight:600;width:42px;text-align:right;flex-shrink:0}
 
 /* TABLE */
 .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
-th{text-align:left;padding:9px 12px;font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border)}
-td{padding:9px 12px;border-bottom:1px solid #1e2235}
+table{width:100%;border-collapse:collapse;font-size:12px;min-width:800px}
+th{text-align:left;padding:8px 10px;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:8px 10px;border-bottom:1px solid #1e2235;vertical-align:middle}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(255,255,255,0.02)}
+tr:hover td{background:rgba(255,255,255,0.015)}
 .t-name{font-weight:500;white-space:nowrap}
-.t-num{font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+.t-num{font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
 .t-center{text-align:center}
-.badge{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;padding:1px 7px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
-.bar-wrap{display:inline-block;width:80px;height:5px;background:#1e2235;border-radius:3px;vertical-align:middle;margin-right:4px}
-.bar-fill{height:100%;border-radius:3px}
-
-/* CARTEIRA */
-.cart-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.cart-item{background:var(--card2);border-radius:10px;padding:16px;text-align:center}
-.cart-num{font-size:32px;font-weight:700}
-.cart-lbl{font-size:11px;color:var(--muted);margin-top:4px}
-
-/* ALERTAS */
-.alerts{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:28px}
-.alert-item{display:flex;gap:10px;padding:12px;border-radius:8px;background:var(--card2);margin-bottom:8px;font-size:13px;line-height:1.5}
-.alert-item:last-child{margin-bottom:0}
-.alert-item a{color:var(--primary)}
+.barra-bg{display:inline-block;width:60px;height:5px;background:#1e2235;border-radius:3px;vertical-align:middle;margin-right:4px}
+.barra-fill{height:100%;border-radius:3px}
 
 /* FEV BANNER */
-.fev-banner{background:linear-gradient(90deg,rgba(99,102,241,0.15),rgba(167,139,250,0.08));border:1px solid rgba(99,102,241,0.3);border-radius:12px;padding:18px 22px;margin-bottom:28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
-.fev-banner .big{font-size:28px;font-weight:700;color:#a78bfa;white-space:nowrap}
-.fev-banner .info{flex:1;min-width:200px}
-.fev-banner .info p{font-size:13px;color:var(--muted);margin-top:2px}
+.fev-banner{background:linear-gradient(90deg,rgba(99,102,241,0.12),rgba(167,139,250,0.06));border:1px solid rgba(99,102,241,0.25);border-radius:12px;padding:16px 22px;margin-bottom:20px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.fev-big{font-size:26px;font-weight:700;color:#a78bfa;white-space:nowrap}
+.fev-info{flex:1;min-width:200px;font-size:12px}
+.fev-info strong{color:#e2e8f0}
 
-/* FOOTER */
-footer{text-align:center;color:var(--muted);font-size:11px;padding:24px 0 8px}
-footer a{color:var(--primary);text-decoration:none}
+/* ALERT */
+.alert-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:20px}
+.alert-item{display:flex;gap:10px;padding:10px 12px;border-radius:8px;background:var(--card2);margin-bottom:8px;font-size:12px;line-height:1.55;align-items:flex-start}
+.alert-item:last-child{margin-bottom:0}
+.al-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+
+/* ANNUAL PROGRESS */
+.annual-wrap{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:20px}
+
+footer{text-align:center;color:var(--muted);font-size:10px;padding:20px 0 6px}
 </style>
 </head>
 <body>
@@ -99,33 +96,44 @@ footer a{color:var(--primary);text-decoration:none}
   <div class="hdr-sep"></div>
   <div class="hdr-text">
     <h1>Dashboard Executivo</h1>
-    <p>Análise Estratégica de Vendas · Janeiro &amp; Fevereiro 2026</p>
+    <p>Análise Estratégica · Janeiro &amp; Fevereiro 2026</p>
   </div>
   <div class="hdr-badge">
-    <div class="tag">CEO Report</div>
-    <p>Gerado em quinta-feira, 26 de fevereiro de 2026 às 10:07</p>
+    <div class="tag">CEO Report · Confidencial</div>
+    <p>quinta-feira, 26 de fevereiro de 2026 às 10:25</p>
   </div>
 </div>
 
-<!-- FEV SNAPSHOT -->
+<!-- FEV BANNER -->
 <div class="fev-banner">
   <div>
-    <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px">Fevereiro 2026 · Parcial (26/28 dias)</div>
-    <div class="big">R$ 790.897</div>
+    <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px">Fevereiro 2026 · 26/28 dias</div>
+    <div class="fev-big">R$ 790.897</div>
   </div>
-  <div class="info">
-    <p><strong style="color:#a78bfa">Projeção mês cheio: R$ 851.735</strong></p>
-    <p>Ritmo diário: R$ 30.419/dia · <span style="color:#10b981">+31,8% vs Janeiro</span></p>
+  <div class="fev-info">
+    <div>Projeção mês cheio: <strong>R$ 851.735</strong></div>
+    <div style="margin-top:3px">Meta fevereiro: <strong>R$ 864.000</strong> · Atingimento proj.: <strong style="color:#f59e0b">98.6%</strong></div>
+    <div style="margin-top:3px;color:var(--muted)">Ritmo: R$ 30.419/dia · <span style="color:#10b981">+31,8% vs Janeiro</span></div>
+  </div>
+  <div style="text-align:center">
+    <div style="font-size:10px;color:var(--muted);margin-bottom:4px">Acumulado 2026</div>
+    <div style="font-size:22px;font-weight:700;color:#10b981">100.8%</div>
+    <div style="font-size:10px;color:var(--muted)">da meta 2 meses</div>
   </div>
 </div>
 
 <!-- KPIs JANEIRO -->
-<div class="section-title">Janeiro 2026 — Fechamento</div>
-<div class="kpi-grid">
-  <div class="kpi">
-    <div class="kpi-label">Faturamento Total</div>
-    <div class="kpi-val" style="color:var(--accent)">R$ 599.953</div>
-    <div class="kpi-delta flat">● +1,0% vs Dez/25</div>
+<div class="sec-title">Janeiro 2026 — Fechamento Completo</div>
+<div class="kpi-row">
+  <div class="kpi green">
+    <div class="kpi-label">Faturamento Jan</div>
+    <div class="kpi-val" style="color:#10b981">R$ 599.953</div>
+    <div class="chip up">✅ 104.2% da meta</div>
+  </div>
+  <div class="kpi green">
+    <div class="kpi-label">Meta Janeiro</div>
+    <div class="kpi-val">R$ 576.000</div>
+    <div class="kpi-sub">Superada em R$ 23.953</div>
   </div>
   <div class="kpi">
     <div class="kpi-label">Clientes Ativos</div>
@@ -133,374 +141,453 @@ footer a{color:var(--primary);text-decoration:none}
     <div class="kpi-sub">3 novos · 34 em risco</div>
   </div>
   <div class="kpi">
-    <div class="kpi-label">Pedidos Emitidos</div>
+    <div class="kpi-label">Pedidos / Ticket</div>
     <div class="kpi-val">66</div>
-    <div class="kpi-sub">Ticket médio R$ 9.090</div>
+    <div class="kpi-sub">Ticket médio R$ 9.090</div>
   </div>
   <div class="kpi">
-    <div class="kpi-label">Média Mensal (11m)</div>
-    <div class="kpi-val" style="font-size:20px">R$ 675.896</div>
-    <div class="kpi-sub">Mar/25 → Jan/26</div>
-  </div>
-  <div class="kpi">
-    <div class="kpi-label">Melhor Mês (histórico)</div>
-    <div class="kpi-val" style="font-size:20px;color:#10b981">R$ 926.414</div>
-    <div class="kpi-sub">Maio/2025</div>
+    <div class="kpi-label">Média Hist. (11m)</div>
+    <div class="kpi-val" style="font-size:19px">R$ 675.896</div>
+    <div class="kpi-sub">Mar/25→Jan/26</div>
   </div>
 </div>
 
-<!-- TENDÊNCIA -->
-<div class="section">
-  <div class="section-title">Tendência de Faturamento — 11 Meses</div>
-  <div class="card">
-    <div class="chart-wrap">
-      <canvas id="trendChart"></canvas>
-    </div>
-  </div>
-</div>
-
-<!-- EQUIPE + MIX -->
+<!-- TENDÊNCIA + META BARRAS -->
 <div class="two-col">
-  <!-- EQUIPE -->
-  <div class="card" style="grid-column:1/-1">
-    <div class="card-title">Performance da Equipe · Jan vs Fev (Parcial → Projeção)</div>
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Vendedor</th>
-            <th>Jan 2026</th>
-            <th>Fev (real)</th>
-            <th>Fev (proj.)</th>
-            <th>Tendência</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-      <td class="t-name">Venda Direta *</td>
-      <td class="t-num">R$ 344.140</td>
-      <td class="t-num">R$ 324.673</td>
-      <td class="t-num" style="color:#a78bfa">R$ 349.648</td>
-      <td class="t-center"><span class="badge" style="background:#f59e0b20;color:#f59e0b">● +2%</span></td>
+  <div class="card" style="margin-bottom:0">
+    <div class="sec-title">Tendência 11 Meses</div>
+    <div class="chart-h-lg"><canvas id="trendChart"></canvas></div>
+  </div>
+  <div class="card" style="margin-bottom:0">
+    <div class="sec-title">Atingimento de Meta — Janeiro</div>
+    <div class="meta-bar-row">
+        <div class="meta-bar-name">Floriano*</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:129.88363149154588%;background:#10b981"></div></div>
+        <div class="meta-bar-pct" style="color:#10b981">130%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Daniela</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:70.67910156250001%;background:#ef4444"></div></div>
+        <div class="meta-bar-pct" style="color:#ef4444">71%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Lenni</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:130%;background:#10b981"></div></div>
+        <div class="meta-bar-pct" style="color:#10b981">137%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Flávio</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:127.5994502314815%;background:#10b981"></div></div>
+        <div class="meta-bar-pct" style="color:#10b981">128%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Carol</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:81.97688802083333%;background:#ef4444"></div></div>
+        <div class="meta-bar-pct" style="color:#ef4444">82%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Glaydson</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:109.16010416666666%;background:#10b981"></div></div>
+        <div class="meta-bar-pct" style="color:#10b981">109%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Edilene</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:84.21743055555555%;background:#ef4444"></div></div>
+        <div class="meta-bar-pct" style="color:#ef4444">84%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Célio</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:80.82460937500001%;background:#ef4444"></div></div>
+        <div class="meta-bar-pct" style="color:#ef4444">81%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Luana</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:29.007762896825394%;background:#ef4444"></div></div>
+        <div class="meta-bar-pct" style="color:#ef4444">29%</div>
+      </div><div class="meta-bar-row">
+        <div class="meta-bar-name">Leonardo</div>
+        <div class="meta-bar-wrap"><div class="meta-bar-fill" style="width:0%;background:#ef4444"></div></div>
+        <div class="meta-bar-pct" style="color:#ef4444">0%</div>
+      </div>
+    <p style="font-size:10px;color:var(--muted);margin-top:10px">* Floriano = Venda Direta total</p>
+  </div>
+</div>
+<div style="margin-bottom:20px"></div>
+
+<!-- TABELA EQUIPE COMPLETA -->
+<div class="sec-title">Performance da Equipe · Jan vs Fev com Metas</div>
+<div class="card">
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Vendedor</th>
+          <th style="text-align:right">Jan Real</th>
+          <th style="text-align:right">Meta Jan</th>
+          <th>Ating. Jan</th>
+          <th style="text-align:right">Fev Real</th>
+          <th style="text-align:right;color:#a78bfa">Fev Proj.</th>
+          <th style="text-align:right">Meta Fev</th>
+          <th>Ating. Fev</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+      <td class="t-name">Floriano (Venda Direta)*</td>
+      <td class="t-num">R$ 344.140</td>
+      <td class="t-num" style="color:#64748b">R$ 264.960</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:100%;background:#10b981;box-shadow:0 0 6px #10b98160"></div></div><span class="badge" style="background:#10b98120;color:#10b981">130%</span>
+      </td>
+      <td class="t-num">R$ 324.673</td>
+      <td class="t-num" style="color:#a78bfa">R$ 349.648</td>
+      <td class="t-num" style="color:#64748b">R$ 397.440</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:87.97511535364796%;background:#6366f1;"></div></div><span class="badge" style="background:#f59e0b20;color:#f59e0b">88%</span>
+      </td>
+    </tr><tr style="background:rgba(99,102,241,0.12)">
+      <td class="t-name">Daniela</td>
+      <td class="t-num">R$ 32.569</td>
+      <td class="t-num" style="color:#64748b">R$ 46.080</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:70.67910156250001%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">71%</span>
+      </td>
+      <td class="t-num">R$ 254.369</td>
+      <td class="t-num" style="color:#a78bfa">R$ 273.936</td>
+      <td class="t-num" style="color:#64748b">R$ 69.120</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:100%;background:#10b981;box-shadow:0 0 6px #10b98160"></div></div><span class="badge" style="background:#10b98120;color:#10b981">396%</span>
+      </td>
     </tr><tr>
       <td class="t-name">Lenni</td>
-      <td class="t-num">R$ 55.361</td>
-      <td class="t-num">R$ 41.455</td>
-      <td class="t-num" style="color:#a78bfa">R$ 44.644</td>
-      <td class="t-center"><span class="badge" style="background:#ef444420;color:#ef4444">▼ -19%</span></td>
+      <td class="t-num">R$ 55.361</td>
+      <td class="t-num" style="color:#64748b">R$ 40.320</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:100%;background:#10b981;box-shadow:0 0 6px #10b98160"></div></div><span class="badge" style="background:#10b98120;color:#10b981">137%</span>
+      </td>
+      <td class="t-num">R$ 41.455</td>
+      <td class="t-num" style="color:#a78bfa">R$ 44.644</td>
+      <td class="t-num" style="color:#64748b">R$ 60.480</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:73.81543803418803%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">74%</span>
+      </td>
     </tr><tr>
       <td class="t-name">Flávio</td>
-      <td class="t-num">R$ 44.098</td>
-      <td class="t-num">R$ 31.542</td>
-      <td class="t-num" style="color:#a78bfa">R$ 33.969</td>
-      <td class="t-center"><span class="badge" style="background:#ef444420;color:#ef4444">▼ -23%</span></td>
+      <td class="t-num">R$ 44.098</td>
+      <td class="t-num" style="color:#64748b">R$ 34.560</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:100%;background:#10b981;box-shadow:0 0 6px #10b98160"></div></div><span class="badge" style="background:#10b98120;color:#10b981">128%</span>
+      </td>
+      <td class="t-num">R$ 31.542</td>
+      <td class="t-num" style="color:#a78bfa">R$ 33.969</td>
+      <td class="t-num" style="color:#64748b">R$ 51.840</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:65.52599121557455%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">66%</span>
+      </td>
     </tr><tr>
       <td class="t-name">Carol</td>
-      <td class="t-num">R$ 37.775</td>
-      <td class="t-num">R$ 61.623</td>
-      <td class="t-num" style="color:#a78bfa">R$ 66.363</td>
-      <td class="t-center"><span class="badge" style="background:#10b98120;color:#10b981">▲ +76%</span></td>
-    </tr><tr style="background:rgba(99,102,241,0.15)">
-      <td class="t-name">Daniela</td>
-      <td class="t-num">R$ 32.569</td>
-      <td class="t-num">R$ 254.369</td>
-      <td class="t-num" style="color:#a78bfa">R$ 273.936</td>
-      <td class="t-center"><span class="badge" style="background:#10b98120;color:#10b981">▲ +741%</span></td>
+      <td class="t-num">R$ 37.775</td>
+      <td class="t-num" style="color:#64748b">R$ 46.080</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:81.97688802083333%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">82%</span>
+      </td>
+      <td class="t-num">R$ 61.623</td>
+      <td class="t-num" style="color:#a78bfa">R$ 66.363</td>
+      <td class="t-num" style="color:#64748b">R$ 69.120</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:96.01127581908831%;background:#6366f1;"></div></div><span class="badge" style="background:#f59e0b20;color:#f59e0b">96%</span>
+      </td>
     </tr><tr>
       <td class="t-name">Glaydson</td>
-      <td class="t-num">R$ 31.438</td>
-      <td class="t-num">R$ 3.960</td>
-      <td class="t-num" style="color:#a78bfa">R$ 4.264</td>
-      <td class="t-center"><span class="badge" style="background:#ef444420;color:#ef4444">▼ -86%</span></td>
+      <td class="t-num">R$ 31.438</td>
+      <td class="t-num" style="color:#64748b">R$ 28.800</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:100%;background:#10b981;box-shadow:0 0 6px #10b98160"></div></div><span class="badge" style="background:#10b98120;color:#10b981">109%</span>
+      </td>
+      <td class="t-num">R$ 3.960</td>
+      <td class="t-num" style="color:#a78bfa">R$ 4.264</td>
+      <td class="t-num" style="color:#64748b">R$ 43.200</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:9.870872507122508%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">10%</span>
+      </td>
     </tr><tr>
       <td class="t-name">Edilene</td>
-      <td class="t-num">R$ 24.255</td>
-      <td class="t-num">R$ 37.374</td>
-      <td class="t-num" style="color:#a78bfa">R$ 40.249</td>
-      <td class="t-center"><span class="badge" style="background:#10b98120;color:#10b981">▲ +66%</span></td>
+      <td class="t-num">R$ 24.255</td>
+      <td class="t-num" style="color:#64748b">R$ 28.800</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:84.21743055555555%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">84%</span>
+      </td>
+      <td class="t-num">R$ 37.374</td>
+      <td class="t-num" style="color:#a78bfa">R$ 40.249</td>
+      <td class="t-num" style="color:#64748b">R$ 43.200</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:93.16932692307691%;background:#6366f1;"></div></div><span class="badge" style="background:#f59e0b20;color:#f59e0b">93%</span>
+      </td>
     </tr><tr>
       <td class="t-name">Célio</td>
-      <td class="t-num">R$ 18.622</td>
-      <td class="t-num">R$ 19.573</td>
-      <td class="t-num" style="color:#a78bfa">R$ 21.079</td>
-      <td class="t-center"><span class="badge" style="background:#f59e0b20;color:#f59e0b">● +13%</span></td>
-    </tr><tr>
+      <td class="t-num">R$ 18.622</td>
+      <td class="t-num" style="color:#64748b">R$ 23.040</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:80.82460937500001%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">81%</span>
+      </td>
+      <td class="t-num">R$ 19.573</td>
+      <td class="t-num" style="color:#a78bfa">R$ 21.079</td>
+      <td class="t-num" style="color:#64748b">R$ 34.560</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:60.991426282051286%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">61%</span>
+      </td>
+    </tr><tr style="background:rgba(239,68,68,0.06)">
       <td class="t-name">Luana</td>
-      <td class="t-num">R$ 11.696</td>
-      <td class="t-num">R$ 16.327</td>
-      <td class="t-num" style="color:#a78bfa">R$ 17.583</td>
-      <td class="t-center"><span class="badge" style="background:#10b98120;color:#10b981">▲ +50%</span></td>
+      <td class="t-num">R$ 11.696</td>
+      <td class="t-num" style="color:#64748b">R$ 40.320</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:29.007762896825394%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">29%</span>
+      </td>
+      <td class="t-num">R$ 16.327</td>
+      <td class="t-num" style="color:#a78bfa">R$ 17.583</td>
+      <td class="t-num" style="color:#64748b">R$ 60.480</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:29.073130341880344%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">29%</span>
+      </td>
+    </tr><tr>
+      <td class="t-name">Leonardo</td>
+      <td class="t-num">R$ 0</td>
+      <td class="t-num" style="color:#64748b">R$ 23.040</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:0%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">0%</span>
+      </td>
+      <td class="t-num">R$ 0</td>
+      <td class="t-num" style="color:#a78bfa">R$ 0</td>
+      <td class="t-num" style="color:#64748b">R$ 34.560</td>
+      <td class="t-center">
+        <div class="barra-bg"><div class="barra-fill" style="width:0%;background:#6366f1;"></div></div><span class="badge" style="background:#ef444420;color:#ef4444">0%</span>
+      </td>
     </tr>
-          <tr style="background:rgba(255,255,255,0.04)">
-            <td class="t-name"><strong>TOTAL</strong></td>
-            <td class="t-num"><strong>R$ 599.953</strong></td>
-            <td class="t-num"><strong>R$ 790.897</strong></td>
-            <td class="t-num" style="color:#a78bfa"><strong>R$ 851.735</strong></td>
-            <td class="t-center"><span class="badge" style="background:#10b98120;color:#10b981">▲ +42.0%</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <p style="font-size:11px;color:var(--muted);margin-top:10px">* Venda Direta = canal gerenciado por Floriano. Projeção = ritmo atual extrapolado ao mês cheio.</p>
-    <p style="font-size:11px;color:#6366f1;margin-top:4px">🔥 Daniela: R$254K real em 26 dias → destaque do mês. Verificar origem do volume.</p>
+        <tr style="background:rgba(255,255,255,0.035);font-weight:700">
+          <td class="t-name">TOTAL EMPRESA</td>
+          <td class="t-num">R$ 599.953</td>
+          <td class="t-num" style="color:#64748b">R$ 576.000</td>
+          <td class="t-center"><span class="badge up">104.2%</span></td>
+          <td class="t-num">R$ 790.897</td>
+          <td class="t-num" style="color:#a78bfa">R$ 851.735</td>
+          <td class="t-num" style="color:#64748b">R$ 864.000</td>
+          <td class="t-center"><span class="badge flat">98.6%</span></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
+  <p style="font-size:10px;color:var(--muted);margin-top:8px">Fev Proj. = extrapolação do ritmo atual (26 dias) ao mês cheio (28 dias). Meta Fev total inclui sazonalidade configurada.</p>
 </div>
 
 <!-- MIX + CARTEIRA -->
 <div class="two-col">
-  <!-- MIX -->
-  <div class="card">
-    <div class="card-title">Mix de Produtos — Janeiro 2026</div>
-    <div class="chart-wrap" style="height:200px">
-      <canvas id="mixChart"></canvas>
-    </div>
+  <div class="card" style="margin-bottom:0">
+    <div class="sec-title">Mix de Produtos — Janeiro</div>
+    <div class="chart-h"><canvas id="mixChart"></canvas></div>
   </div>
-  <!-- CARTEIRA -->
-  <div class="card">
-    <div class="card-title">Saúde da Carteira — Janeiro 2026</div>
-    <div class="cart-grid" style="margin-bottom:16px">
-      <div class="cart-item">
-        <div class="cart-num" style="color:#10b981">59</div>
-        <div class="cart-lbl">Clientes Ativos</div>
+  <div class="card" style="margin-bottom:0">
+    <div class="sec-title">Saúde da Carteira</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+      <div style="background:var(--card2);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#10b981">59</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px">Ativos Jan</div>
       </div>
-      <div class="cart-item">
-        <div class="cart-num" style="color:#6366f1">3</div>
-        <div class="cart-lbl">Novos em Jan</div>
+      <div style="background:var(--card2);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#6366f1">3</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px">Novos</div>
       </div>
-      <div class="cart-item">
-        <div class="cart-num" style="color:#f59e0b">34</div>
-        <div class="cart-lbl">Em Risco ⚠️</div>
+      <div style="background:var(--card2);border-radius:10px;padding:14px;text-align:center">
+        <div style="font-size:28px;font-weight:700;color:#f59e0b">34</div>
+        <div style="font-size:10px;color:var(--muted);margin-top:3px">Em Risco</div>
       </div>
     </div>
-    <p style="font-size:12px;color:var(--muted);line-height:1.6">
-      <strong style="color:#f59e0b">34 clientes</strong> compraram em dez/25 mas não em jan/26.<br>
-      Taxa de retenção mensal: <strong style="color:#e2e8f0">63%</strong><br>
-      Meta recomendada: &gt;85% retenção por mês.
+    <p style="font-size:12px;color:var(--muted);line-height:1.7">
+      Retenção mensal: <strong style="color:#e2e8f0">63%</strong><br>
+      34 clientes de dez/25 não compraram em jan/26.<br>
+      Meta recomendada: &gt;85% retenção mensal.
     </p>
+    <div style="margin-top:12px;background:var(--card2);border-radius:8px;padding:10px 12px">
+      <div style="font-size:10px;color:var(--muted);margin-bottom:6px">RETENÇÃO</div>
+      <div style="height:8px;background:#1e2235;border-radius:4px;overflow:hidden">
+        <div style="width:63%;height:100%;background:#f59e0b;border-radius:4px"></div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px">
+        <span>0%</span><span style="color:#f59e0b">63%</span><span>100%</span>
+      </div>
+    </div>
   </div>
 </div>
+<div style="margin-bottom:20px"></div>
 
 <!-- MIX TABLE -->
-<div class="section">
-  <div class="section-title">Ranking de Produtos por Categoria — Janeiro 2026</div>
-  <div class="card">
-    <div class="tbl-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Categoria</th>
-            <th>Faturamento</th>
-            <th>Unidades</th>
-            <th>Participação</th>
-          </tr>
-        </thead>
-        <tbody><tr>
+<div class="sec-title">Ranking de Categorias de Produtos — Janeiro</div>
+<div class="card">
+  <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th>Categoria</th><th style="text-align:right">Faturamento</th><th style="text-align:right">Unidades</th><th>Participação</th></tr>
+      </thead>
+      <tbody><tr>
       <td class="t-name"><span class="dot" style="background:#6366f1"></span>Kits</td>
-      <td class="t-num">R$ 262.708</td>
+      <td class="t-num">R$ 262.708</td>
       <td class="t-num">2.274</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:43.8%;background:#6366f1"></div></div>
-        <span style="font-size:11px;color:#94a3b8">43.8%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:100%;background:#6366f1"></div></div> <span style="font-size:11px;color:#94a3b8">43.8%</span></td>
     </tr><tr>
       <td class="t-name"><span class="dot" style="background:#8b5cf6"></span>Polidores</td>
-      <td class="t-num">R$ 67.364</td>
+      <td class="t-num">R$ 67.364</td>
       <td class="t-num">1.764</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:11.2%;background:#8b5cf6"></div></div>
-        <span style="font-size:11px;color:#94a3b8">11.2%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:26%;background:#8b5cf6"></div></div> <span style="font-size:11px;color:#94a3b8">11.2%</span></td>
     </tr><tr>
       <td class="t-name"><span class="dot" style="background:#a78bfa"></span>Pontas Diamantadas</td>
-      <td class="t-num">R$ 59.496</td>
+      <td class="t-num">R$ 59.496</td>
       <td class="t-num">4.447</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:9.9%;background:#a78bfa"></div></div>
-        <span style="font-size:11px;color:#94a3b8">9.9%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:23%;background:#a78bfa"></div></div> <span style="font-size:11px;color:#94a3b8">9.9%</span></td>
     </tr><tr>
       <td class="t-name"><span class="dot" style="background:#c4b5fd"></span>Brocas Multilaminadas</td>
-      <td class="t-num">R$ 49.421</td>
+      <td class="t-num">R$ 49.421</td>
       <td class="t-num">1.687</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:8.2%;background:#c4b5fd"></div></div>
-        <span style="font-size:11px;color:#94a3b8">8.2%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:19%;background:#c4b5fd"></div></div> <span style="font-size:11px;color:#94a3b8">8.2%</span></td>
     </tr><tr>
-      <td class="t-name"><span class="dot" style="background:#ddd6fe"></span>Brocas Carbide</td>
-      <td class="t-num">R$ 47.778</td>
+      <td class="t-name"><span class="dot" style="background:#818cf8"></span>Brocas Carbide</td>
+      <td class="t-num">R$ 47.778</td>
       <td class="t-num">4.669</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:8.0%;background:#ddd6fe"></div></div>
-        <span style="font-size:11px;color:#94a3b8">8.0%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:18%;background:#818cf8"></div></div> <span style="font-size:11px;color:#94a3b8">8.0%</span></td>
     </tr><tr>
-      <td class="t-name"><span class="dot" style="background:#ede9fe"></span>Brocas Especiais</td>
-      <td class="t-num">R$ 47.109</td>
+      <td class="t-name"><span class="dot" style="background:#4f46e5"></span>Brocas Especiais</td>
+      <td class="t-num">R$ 47.109</td>
       <td class="t-num">1.923</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:7.9%;background:#ede9fe"></div></div>
-        <span style="font-size:11px;color:#94a3b8">7.9%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:18%;background:#4f46e5"></div></div> <span style="font-size:11px;color:#94a3b8">7.9%</span></td>
     </tr><tr>
-      <td class="t-name"><span class="dot" style="background:#f3e8ff"></span>Pedras</td>
-      <td class="t-num">R$ 16.077</td>
+      <td class="t-name"><span class="dot" style="background:#7c3aed"></span>Pedras</td>
+      <td class="t-num">R$ 16.077</td>
       <td class="t-num">698</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:2.7%;background:#f3e8ff"></div></div>
-        <span style="font-size:11px;color:#94a3b8">2.7%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:6%;background:#7c3aed"></div></div> <span style="font-size:11px;color:#94a3b8">2.7%</span></td>
     </tr><tr>
       <td class="t-name"><span class="dot" style="background:#94a3b8"></span>Outros</td>
-      <td class="t-num">R$ 8.493</td>
+      <td class="t-num">R$ 8.493</td>
       <td class="t-num">314</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:1.4%;background:#94a3b8"></div></div>
-        <span style="font-size:11px;color:#94a3b8">1.4%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:3%;background:#94a3b8"></div></div> <span style="font-size:11px;color:#94a3b8">1.4%</span></td>
     </tr><tr>
       <td class="t-name"><span class="dot" style="background:#cbd5e1"></span>Escovas</td>
-      <td class="t-num">R$ 6.236</td>
+      <td class="t-num">R$ 6.236</td>
       <td class="t-num">466</td>
-      <td class="t-center">
-        <div class="bar-wrap"><div class="bar-fill" style="width:1.0%;background:#cbd5e1"></div></div>
-        <span style="font-size:11px;color:#94a3b8">1.0%</span>
-      </td>
+      <td><div class="barra-bg" style="width:120px"><div class="barra-fill" style="width:2%;background:#cbd5e1"></div></div> <span style="font-size:11px;color:#94a3b8">1.0%</span></td>
     </tr></tbody>
-      </table>
-    </div>
+    </table>
   </div>
 </div>
 
-<!-- ALERTAS ESTRATÉGICOS -->
-<div class="section">
-  <div class="section-title">Sinais &amp; Atenções Estratégicas</div>
-  <div class="alerts">
-    
-    <div class="alert-item" style="border-left:3px solid #6366f1">
-      <span>🔥</span>
-      <span><strong>Daniela</strong> faturou R$ 254.369 em fevereiro (parcial) — <strong>+680% vs janeiro</strong>. Investigar origem (pedido especial / novo canal).</span>
+<!-- META ANUAL -->
+<div class="sec-title">Meta Anual 2026 — Visão Acumulada</div>
+<div class="annual-wrap">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:16px">
+    <div>
+      <div style="font-size:13px;font-weight:600">Meta Total 2026</div>
+      <div style="font-size:28px;font-weight:700;color:var(--accent)">R$ 8.463.360</div>
     </div>
-    <div class="alert-item" style="border-left:3px solid #f59e0b">
-      <span>⚠️</span>
-      <span><strong>34 clientes</strong> compraram em dezembro mas não em janeiro. Plano de reativação necessário.</span>
+    <div style="text-align:center">
+      <div style="font-size:11px;color:var(--muted)">Realizado (Jan+Fev proj.)</div>
+      <div style="font-size:22px;font-weight:700">R$ 1.451.689</div>
     </div>
-    <div class="alert-item" style="border-left:3px solid #10b981">
-      <span>📈</span>
-      <span>Fevereiro projetado: <strong>R$ 851.735</strong> — se manter ritmo será o <strong>2º maior mês desde março/25</strong>.</span>
+    <div style="text-align:center">
+      <div style="font-size:11px;color:var(--muted)">% do Ano (2 meses)</div>
+      <div style="font-size:22px;font-weight:700;color:#10b981">17.2%</div>
     </div>
-    <div class="alert-item" style="border-left:3px solid #94a3b8">
-      <span>📋</span>
-      <span><strong>Metas 2026</strong> ainda não configuradas no sistema. <a href="mailto:marcelo@jotadental.com.br" style="color:#6366f1">Definir agora →</a></span>
+    <div style="text-align:center">
+      <div style="font-size:11px;color:var(--muted)">Esperado em 2 meses</div>
+      <div style="font-size:22px;font-weight:700;color:var(--muted)">16.7%</div>
     </div>
+  </div>
+  <div style="height:10px;background:#1e2235;border-radius:5px;overflow:hidden;margin-bottom:6px">
+    <div style="width:17.2%;height:100%;background:linear-gradient(90deg,#6366f1,#a78bfa);border-radius:5px"></div>
+  </div>
+  <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted)">
+    <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Set</span><span>Out</span><span>Nov</span><span>Dez</span>
   </div>
 </div>
 
-<!-- METAS PLACEHOLDER -->
-<div class="section">
-  <div class="section-title">Metas 2026</div>
-  <div class="card" style="text-align:center;padding:32px">
-    <div style="font-size:40px;margin-bottom:12px">🎯</div>
-    <div style="font-size:16px;font-weight:600;margin-bottom:8px">Metas ainda não configuradas</div>
-    <p style="color:var(--muted);font-size:13px;max-width:400px;margin:0 auto;line-height:1.6">
-      A tabela <code style="color:var(--accent)">sales_goals</code> no Supabase existe mas está vazia.<br>
-      Defina as metas mensais por vendedor para que o próximo relatório mostre acompanhamento automático de % de atingimento.
-    </p>
+<!-- ALERTAS -->
+<div class="sec-title">Sinais Estratégicos</div>
+<div class="alert-box">
+  <div class="alert-item" style="border-left:3px solid #10b981">
+    <span class="al-icon">✅</span>
+    <span><strong>Janeiro superou a meta:</strong> R$599.953 vs meta R$576.000 (+R$23.953). Lenni (+137%), Flávio (+128%) e Floriano (+130%) foram os destaques.</span>
+  </div>
+  <div class="alert-item" style="border-left:3px solid #6366f1">
+    <span class="al-icon">🔥</span>
+    <span><strong>Daniela — fevereiro explosivo:</strong> R$254.369 real em 26 dias = <strong>368% da meta mensal</strong>. Volume incomum — verificar se é pedido especial, novo canal ou acumulado de meses anteriores.</span>
+  </div>
+  <div class="alert-item" style="border-left:3px solid #ef4444">
+    <span class="al-icon">🔴</span>
+    <span><strong>Glaydson em queda crítica:</strong> R$31.438 em jan → R$3.959 em fev (26 dias). Apenas 9% da meta de fevereiro. Requer ação imediata da gestão.</span>
+  </div>
+  <div class="alert-item" style="border-left:3px solid #ef4444">
+    <span class="al-icon">🔴</span>
+    <span><strong>Luana abaixo da meta:</strong> Janeiro 29% (R$11.695/R$40.320). Fevereiro 27% projetado. Dois meses consecutivos críticos. Verificar carteira e pipeline.</span>
+  </div>
+  <div class="alert-item" style="border-left:3px solid #f59e0b">
+    <span class="al-icon">⚠️</span>
+    <span><strong>34 clientes em risco:</strong> Compraram em dez/25 mas não em jan/26. Reativação destes clientes pode adicionar R$100K+ ao mês.</span>
+  </div>
+  <div class="alert-item" style="border-left:3px solid #f59e0b">
+    <span class="al-icon">⚠️</span>
+    <span><strong>Fevereiro: meta R$864K, projeção R$852K (98.6%).</strong> Faltam ~R$12K para bater a meta. Daniela já garante 30% sozinha.</span>
   </div>
 </div>
 
 <footer>
-  <p>Jota Dental · Dashboard Executivo · Dados: Sankhya ERP · quinta-feira, 26 de fevereiro de 2026 às 10:07</p>
-  <p style="margin-top:4px">Gerado automaticamente · <a href="https://jota-brasil.github.io/hub-reports/">hub-reports</a></p>
+  <p>Jota Dental · Dashboard Executivo Confidencial · Dados: Sankhya ERP + Supabase Goals</p>
+  <p style="margin-top:3px">quinta-feira, 26 de fevereiro de 2026 às 10:25 · <a href="https://jota-brasil.github.io/hub-reports/" style="color:#6366f1">hub-reports</a></p>
 </footer>
-
-</div><!-- /wrap -->
+</div>
 
 <script>
-// ─── TREND CHART ──────────────────────────────────────────
-const tCtx = document.getElementById('trendChart').getContext('2d');
-new Chart(tCtx, {
-  type: 'line',
-  data: {
-    labels: ["Mar/25","Abr/25","Mai/25","Jun/25","Jul/25","Ago/25","Set/25","Out/25","Nov/25","Dez/25","Jan/26"],
-    datasets: [{
-      label: 'Faturamento',
-      data: [745212.86,694994.71,926414.2,667479.13,636695.1,765169.99,706862.89,699404.41,398647.38,594024.11,599953.41],
-      borderColor: '#6366f1',
-      backgroundColor: 'rgba(99,102,241,0.08)',
-      borderWidth: 2.5,
-      pointRadius: 4,
-      pointHoverRadius: 6,
-      pointBackgroundColor: '#6366f1',
-      fill: true,
-      tension: 0.4
+// TREND
+const tc = document.getElementById('trendChart').getContext('2d');
+new Chart(tc,{
+  type:'line',
+  data:{
+    labels:["Mar/25","Abr/25","Mai/25","Jun/25","Jul/25","Ago/25","Set/25","Out/25","Nov/25","Dez/25","Jan/26"],
+    datasets:[{
+      label:'Faturamento',
+      data:[745212.86,694994.71,926414.2,667479.13,636695.1,765169.99,706862.89,699404.41,398647.38,594024.11,599953.41],
+      borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,0.07)',
+      borderWidth:2.5,pointRadius:4,pointHoverRadius:6,
+      pointBackgroundColor:'#6366f1',fill:true,tension:0.4
     },{
-      label: 'Clientes Ativos',
-      data: [80,72,87,68,88,85,86,80,72,47,59],
-      borderColor: '#10b981',
-      backgroundColor: 'transparent',
-      borderWidth: 1.5,
-      borderDash: [4,4],
-      pointRadius: 3,
-      yAxisID: 'y2'
+      label:'Meta Jan',
+      data:[null,null,null,null,null,null,null,null,null,null,576000],
+      borderColor:'#10b981',backgroundColor:'transparent',
+      borderWidth:0,pointRadius:ctx=>ctx.raw?8:0,
+      pointStyle:'star',pointBackgroundColor:'#10b981',
+      showLine:false
+    },{
+      label:'Clientes',
+      data:[80,72,87,68,88,85,86,80,72,47,59],
+      borderColor:'#a78bfa',backgroundColor:'transparent',
+      borderWidth:1.5,borderDash:[4,4],
+      pointRadius:2,yAxisID:'y2'
     }]
   },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: { labels: { color: '#94a3b8', font: { size: 11 } } },
-      tooltip: {
-        callbacks: {
-          label: ctx => ctx.datasetIndex===0
-            ? ' R$ ' + Number(ctx.raw).toLocaleString('pt-BR',{minimumFractionDigits:0})
-            : ' ' + ctx.raw + ' clientes'
-        }
-      }
+  options:{
+    responsive:true,maintainAspectRatio:false,
+    plugins:{
+      legend:{labels:{color:'#94a3b8',font:{size:10}}},
+      tooltip:{callbacks:{label:ctx=>ctx.datasetIndex===0?' R$'+Number(ctx.raw).toLocaleString('pt-BR',{minimumFractionDigits:0}):ctx.datasetIndex===1?' Meta: R$'+Number(ctx.raw).toLocaleString('pt-BR',{minimumFractionDigits:0}):' '+ctx.raw+' cli.'}}
     },
-    scales: {
-      x: { ticks: { color: '#64748b', font:{size:10} }, grid: { color: '#1e2235' } },
-      y: {
-        ticks: { color: '#64748b', font:{size:10}, callback: v => 'R$'+(v/1000).toFixed(0)+'K' },
-        grid: { color: '#1e2235' }
-      },
-      y2: {
-        position: 'right',
-        ticks: { color: '#10b981', font:{size:10} },
-        grid: { display: false }
-      }
+    scales:{
+      x:{ticks:{color:'#64748b',font:{size:9}},grid:{color:'#1e2235'}},
+      y:{ticks:{color:'#64748b',font:{size:9},callback:v=>'R$'+(v/1000).toFixed(0)+'K'},grid:{color:'#1e2235'}},
+      y2:{position:'right',ticks:{color:'#a78bfa',font:{size:9}},grid:{display:false}}
     }
   }
 });
 
-// ─── MIX DONUT ────────────────────────────────────────────
-const mCtx = document.getElementById('mixChart').getContext('2d');
-new Chart(mCtx, {
-  type: 'doughnut',
-  data: {
-    labels: ["Kits","Polidores","Pontas Diamantadas","Brocas Multilaminadas","Brocas Carbide","Brocas Especiais","Pedras","Outros","Escovas"],
-    datasets: [{
-      data: [262707.71,67364.45,59495.59,49421.29,47778.17,47108.53,16077.33,8492.54,6235.72],
-      backgroundColor: ["#6366f1","#8b5cf6","#a78bfa","#c4b5fd","#ddd6fe","#ede9fe","#f3e8ff","#94a3b8","#cbd5e1"],
-      borderColor: '#141728',
-      borderWidth: 2,
-      hoverOffset: 6
-    }]
+// MIX DONUT
+const mc = document.getElementById('mixChart').getContext('2d');
+new Chart(mc,{
+  type:'doughnut',
+  data:{
+    labels:["Kits","Polidores","Pontas Diamantadas","Brocas Multilaminadas","Brocas Carbide","Brocas Especiais","Pedras","Outros","Escovas"],
+    datasets:[{data:[262707.71,67364.45,59495.59,49421.29,47778.17,47108.53,16077.33,8492.54,6235.72],backgroundColor:["#6366f1","#8b5cf6","#a78bfa","#c4b5fd","#818cf8","#4f46e5","#7c3aed","#94a3b8","#cbd5e1"],borderColor:'#141728',borderWidth:2,hoverOffset:5}]
   },
-  options: {
-    responsive: true,
-    maintainAspectRatio: false,
-    cutout: '62%',
-    plugins: {
-      legend: { position:'right', labels: { color:'#94a3b8', font:{size:10}, boxWidth:10, padding:8 } },
-      tooltip: {
-        callbacks: {
-          label: ctx => {
-            const total = ctx.dataset.data.reduce((a,b)=>a+b,0);
-            return ' R$ ' + Number(ctx.raw).toLocaleString('pt-BR',{minimumFractionDigits:0}) + ' (' + (ctx.raw/total*100).toFixed(1) + '%)';
-          }
-        }
-      }
+  options:{
+    responsive:true,maintainAspectRatio:false,cutout:'60%',
+    plugins:{
+      legend:{position:'right',labels:{color:'#94a3b8',font:{size:10},boxWidth:9,padding:7}},
+      tooltip:{callbacks:{label:ctx=>{const t=ctx.dataset.data.reduce((a,b)=>a+b,0);return' R$'+Number(ctx.raw).toLocaleString('pt-BR',{minimumFractionDigits:0})+' ('+(ctx.raw/t*100).toFixed(1)+'%)'}}}
     }
   }
 });
